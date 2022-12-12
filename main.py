@@ -1,6 +1,5 @@
 import telebot
 
-
 CHAVE_API = "5971940889:AAGrltLY_AMm0Swwr-o8uaKmilhZsBJiM20"
 bot = telebot.TeleBot(CHAVE_API)
 
@@ -64,33 +63,6 @@ Não existe nenhuma regra que exija que sua redação tenha 4 parágrafos, mas e
 def op6(mensagem):
     texto = """Não é sem razão que o primeiro parágrafo da estrutura de uma redação é chamado de introdução, pois é nessa parte do texto que você vai expor (apresentar) as principais questões a serem abordadas no restante do texto.
 No primeiro parágrafo, o leitor terá uma dimensão geral do assunto e vai entender as razões pelas quais a discussão do problema é relevante.
-"""
-    bot.reply_to(mensagem, texto)
-
-
-@bot.message_handler(commands=["argumentacao"])
-def argumentos(mensagem):
-    texto = """Argumento de Exemplificação:
-    Ele pode ser usado para explicitar o argumento através de um exemplo. Em um tema como a persistência do racismo na sociedade brasileira o argumento de exemplificação que pode ser utilizado é o caso do músico negro que foi morto com 80 tiros disparados pelo exercito brasileiro no Rio de Janeiro.
-    Esse argumento serve para embasar que o preconceito racial persiste na sociedade, visto a suspeita que um homem negro levantou porque foi confundido com criminosos.
-
-Argumento de Autoridade:
-    É a utilização da fala de uma figura reconhecida sobre o assunto, ou até mesmo o que essa personalidade representa para o tema em questão.
-    Por exemplo, ainda dentro do tema sobre racismo, é cabível citar Nelson Mandela, visto que ele foi um advogado e militante importantíssimo para a superação dos preconceitos e da segregação racial na África do Sul.
-    É ainda mais interessante citar uma frase que ele tenha dito sobre o assunto, como “Ninguém nasce odiando o outro pela cor de sua pele, ou por sua origem, ou sua religião." de seu livro Longo Caminho para a Liberdade.
-
-Argumento histórico:
-   É aquele que aconteceu em determinado momento da história - seja ele a nível mundial ou particular, como a Ditadura Militar brasileira. É comprovado por si só, visto que é de conhecimento geral.
-   Um exemplo de argumento histórico para comprovar a persistência do racismo na sociedade brasileira - e de vários países do mundo - é o fato de que a escravidão, principalmente no século XIX com povos africanos, e a utilização dos mesmos como moeda de troca possibilitou que eles fossem vistos por algumas pessoas como inferiores a outras raças.
-
-Argumento comparativo:
-    A comparação é um excelente recurso que pode ser utilizado para deixar ainda mais evidente uma opinião sobre determinado assunto.
-    Tratando-se de racismo, é coerente, ao realizar a argumentação, afirmar que a escravidão no Brasil ocorreu de forma velada enquanto que nos EUA ela foi muito evidente pela segregação até mesmo de bairros para negros e brancos.
-    Lançando um olhar sob os dias de hoje, observa-se que o racismo no Brasil parece ainda mais fortificado enquanto que nos EUA muitas barreiras já foram superadas, visto que Barack Obama foi o primeiro presidente negro do país.
-
-Fatos (dados estatísticos):
-    O uso de informações retiradas de veículos de informação legitimados é um forte argumento para o embasamento da posição apresentada pelo candidato.
-    Por exemplo, afirmar a persistência do racismo na sociedade brasileira e trazer a informação do Atlas da Violência de que 75% das vítimas de homicídio no país são negras fundamenta ainda mais o argumento de que o racismo é um problema que permanece na sociedade.
 """
     bot.reply_to(mensagem, texto)
 
@@ -551,6 +523,7 @@ def outro(mensagem):
 
 @bot.message_handler(commands=["comecar"])
 def comecar(mensagem):
+    bot.send_chat_action(mensagem.chat.id, 'typing')
     texto = """
     Escolha uma opção para continuar (Clique no item):
      /opcao1 Noção de estrutura
@@ -569,10 +542,11 @@ def verificar(mensagem):
 
 @bot.message_handler(func=verificar)
 def responder(mensagem):
-    texto = """Olá! Seja Bem-Vindo(a).
+    bot.send_chat_action(mensagem.chat.id, 'typing')
+    texto = """Olá!/ Seja Bem-Vindo(a).
 Eu sou a Nayomi, para obter uma redação NOTA 1000 clique abaixo:
     /comecar"""
     bot.reply_to(mensagem, texto)
 
 
-bot.polling()
+bot.infinity_polling()
